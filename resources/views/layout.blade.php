@@ -50,10 +50,8 @@
             <a href="#" class="text-2xl font-bold text-primary dark:text-white hover:text-secondary dark:hover:text-secondary transition duration-300">MedCare</a>
             <div class="hidden md:flex space-x-6">
                 <a href="#" class="text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white px-3 py-2 rounded transition duration-300">Trang chủ</a>
-                <a href="#" class="text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white px-3 py-2 rounded transition duration-300">Sản phẩm</a>
+                <a href="#" class="text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white px-3 py-2 rounded transition duration-300">Blog các bài thuốc hay</a>
                 <a href="#" class="text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white px-3 py-2 rounded transition duration-300">Blog sức khỏe</a>
-                <a href="#" class="text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white px-3 py-2 rounded transition duration-300">Dịch vụ y tế</a>
-                <a href="#" class="text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white px-3 py-2 rounded transition duration-300">Liên hệ</a>
             </div>
             <div class="flex items-center">
                 <button id="darkModeToggle" class="mr-4 p-2 rounded-full bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 transition duration-300">
@@ -70,10 +68,8 @@
         </nav>
         <div class="md:hidden hidden" id="mobile-menu">
             <a href="#" class="block py-2 px-4 text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition duration-300">Trang chủ</a>
-            <a href="#" class="block py-2 px-4 text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition duration-300">Sản phẩm</a>
+            <a href="#" class="block py-2 px-4 text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition duration-300">Blog các bài thuốc hay</a>
             <a href="#" class="block py-2 px-4 text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition duration-300">Blog sức khỏe</a>
-            <a href="#" class="block py-2 px-4 text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition duration-300">Dịch vụ y tế</a>
-            <a href="#" class="block py-2 px-4 text-gray-700 dark:text-gray-300 hover:bg-primary hover:text-white transition duration-300">Liên hệ</a>
         </div>
     </header>
     <!-- Content -->
