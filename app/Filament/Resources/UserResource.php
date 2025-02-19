@@ -14,6 +14,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Select;
+// use App\Models\Role;
+use Spatie\Permission\Models\Role;
 
 class UserResource extends Resource
 {
@@ -29,7 +32,14 @@ class UserResource extends Resource
             ->schema([
                 //
                 TextInput::make('name'),
-                TextInput::make('email')
+                TextInput::make('email'),
+                TextInput::make('password')
+                    ->password(),
+                Select::make('roles')
+                    ->label('Roles')
+                    ->multiple()
+                    ->options(Role::pluck('name', 'name'))
+                    ->required(),
             ]);
     }
 
@@ -40,6 +50,10 @@ class UserResource extends Resource
                 //
                 TextColumn::make('name'),
                 TextColumn::make('email'),
+                TextColumn::make('roles')
+                    ->label('Roles')
+                    ->getStateUsing(fn ($record) => $record->getRoleNames()->join(', ')),
+                
             ])
             ->filters([
                 //
