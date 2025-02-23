@@ -15,8 +15,10 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select;
-// use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Filament\Facades\Filament;
 
 class UserResource extends Resource
 {
@@ -34,12 +36,21 @@ class UserResource extends Resource
                 TextInput::make('name'),
                 TextInput::make('email'),
                 TextInput::make('password')
-                    ->password(),
+                    ->password()
+                    ->nullable()
+                    ->dehydrateStateUsing(fn($state) => !empty($state) ? Hash::make($state) : null),
+
                 Select::make('roles')
                     ->label('Roles')
                     ->multiple()
-                    ->options(Role::pluck('name', 'name'))
+                    ->relationship('roles', 'name')
+                    ->preload()
+                    ->options(
+                       auth()->user()->hasRole('Admin')
+                       ?Role::where('name', '!=', 'Super Admin')->pluck('name','id')->toArray() : Role::pluck('name','id')->toArray()
+                    )
                     ->required(),
+
             ]);
     }
 
@@ -52,15 +63,18 @@ class UserResource extends Resource
                 TextColumn::make('email'),
                 TextColumn::make('roles')
                     ->label('Roles')
-                    ->getStateUsing(fn ($record) => $record->getRoleNames()->join(', ')),
-                
+                    ->getStateUsing(fn($record) => $record->getRoleNames()->join(', ')),
+
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->action(fn($record) => $record->delete())
+                    ->requiresConfirmation('Are you sure you want to delete this user?')
+                    ->successNotificationTitle('Post deleted successfully!'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -83,5 +97,25 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->hasPermissionTo('view_user');
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->hasPermissionTo('create_user');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()->hasPermissionTo('update_user');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()->hasPermissionTo('delete_user');
     }
 }

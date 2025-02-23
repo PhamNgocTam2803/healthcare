@@ -3,17 +3,23 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\RoleResource\Pages;
+use App\Filament\Resources\RoleResource\Pages\ListRoles;
 use App\Filament\Resources\RoleResource\RelationManagers;
 use App\Models\Role;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Pages\Page;
+use Filament\Panel as FilamentPanel;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
-
+use Illuminate\Support\Facades\Route;
 class RoleResource extends Resource
 {
     protected static ?string $model = Role::class;
@@ -28,6 +34,13 @@ class RoleResource extends Resource
         return $form
             ->schema([
                 //
+                TextInput::make('name'),
+                Select::make('permissions')
+                    ->label('Permissions')
+                    ->multiple()
+                    ->relationship('permissions', 'name')
+                    ->preload()
+                    ->required(),
             ]);
     }
 
@@ -68,4 +81,20 @@ class RoleResource extends Resource
             'edit' => Pages\EditRole::route('/{record}/edit'),
         ];
     }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->hasRole('Super Admin');
+    }
+
+    // public static function routes(Panel $panel): void
+    // {
+    //     $panel->routes(function () {
+    //         Route::middleware(['auth', 'check_role'])
+    //         ->group(function () {
+    //             Route::get('/roles');
+    //             Route::get('/permissions');
+    //         });
+    //     });
+    // }
 }

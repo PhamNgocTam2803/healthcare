@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 ######################################################################################################
-Route::view('/', 'home');
+Route::get('/', [PostController::class, 'home'])->name('home');
+
+Route::get('/post/{post_id}', [PostController::class, 'getPost']);
+
+Route::get('/category/{category_slug}', [PostController::class, 'getCategory']);
+// Route::view('/post', 'post')->name('post');

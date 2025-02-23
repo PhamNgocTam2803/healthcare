@@ -14,10 +14,10 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         //
-        $permissions = ['create', 'delete', 'update', 'view'];
+        $permissions = ['create_category', 'delete_category', 'update_category', 'view_category','create_blog', 'delete_blog', 'update_blog', 'view_blog', 'create_user', 'delete_user', 'update_user', 'view_user'];
 
-        foreach($permissions as $permission) {
-            Permission::create(['name'=>$permission]);
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
         }
     }
 }

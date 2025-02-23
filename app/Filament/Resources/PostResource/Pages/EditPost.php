@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\RolesResource\Pages;
+namespace App\Filament\Resources\PostResource\Pages;
 
-use App\Filament\Resources\RolesResource;
+use App\Filament\Resources\PostResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditRoles extends EditRecord
+class EditPost extends EditRecord
 {
-    protected static string $resource = RolesResource::class;
+    protected static string $resource = PostResource::class;
 
     protected function getHeaderActions(): array
     {
