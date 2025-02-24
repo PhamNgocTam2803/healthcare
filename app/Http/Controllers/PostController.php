@@ -40,12 +40,24 @@ class PostController extends Controller
 
     public function getCategory($category_slug)
     {
-        $category = Category::where('slug', $category_slug)->first()->name;
+        $category = Category::where('slug', $category_slug)->first();
         // dd($category);
         $posts = Category::where('slug', $category_slug)
             ->first()
             ->posts()
             ->get();
-        return view('category', compact('posts','category'));
+        return view('category', compact('posts', 'category'));
+    }
+
+    public function search(Request $request)
+    {
+        $find = $request->input('find');
+        // dd($find);
+        $posts = Post::where('name', 'like', "%$find%")
+        ->orWhere('description', 'like', "%$find%")
+        ->orWhere('content', 'like', "%$find%")
+        ->get();
+        // dd($posts);
+        return view('result', compact('posts', 'find'));
     }
 }

@@ -6,9 +6,8 @@
     <!-- @vite('resources/css/app.css') -->
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @if (isset($post->meta_desc))
-    <meta name="description" content="{{ $post->meta_desc }}">
-    @endif
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="description" content="@yield('description')">
     <title>@yield('title')</title>
     <script>
         tailwind.config = {
@@ -37,28 +36,6 @@
             }
         }
     </script>
-    <style>
-        .slideshow {
-            position: relative;
-            height: 300px;
-            overflow: hidden;
-        }
-
-        .slideshow img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            object-fit: cover;
-        }
-
-        .slideshow img.active {
-            opacity: 1;
-        }
-    </style>
 </head>
 
 <body class="font-sans transition-colors duration-300 ease-in-out bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
@@ -97,6 +74,17 @@
             <a href="#" class="block py-2 px-4 text-white hover:bg-secondary-light hover:text-white dark:hover:bg-secondary-dark dark:hover:text-white transition duration-300">Dinh dưỡng & ăn uống</a>
         </div>
     </header>
+    {{-- Search Form --}}
+    <div>
+        <div class="intro text-center text-sky-400 bg-gray-300 dark:bg-blue-400 dark:text-white font-semibold text-[25px] py-[10px]">
+            <h1>Chào mừng bạn đến với NUTRIMIND – Nơi giúp bạn cân bằng thân – tâm – trí!</h1>
+            <h2>Chúng tôi mang đến những bài viết chuyên sâu về sức khỏe tinh thần và dinh dưỡng</h2>
+        </div>
+        <form class="search mx-auto w-[500px] h-[50px] flex items-center justify-center" action="{{route('search')}}" method="GET">
+            <input class="bg-white dark:bg-orange-50 dark:text-black h-[40px] w-[350px]" name="find" type="text" placeholder="Nhập từ khoá tìm kiếm">
+            <button class="ml-[10px] text-[25px] hover:bg-sky-500 w-[40px]" type="submit"> <i class="fa fa-search"></i></button>
+        </form>
+    </div>
     <!-- Content -->
     @yield('content')
     <!-- End Content -->
@@ -111,10 +99,8 @@
                     <h3 class="text-xl font-bold mb-4">Liên kết nhanh</h3>
                     <ul class="space-y-2">
                         <li><a href="#" class="text-gray-200 dark:text-gray-300 hover:text-white transition duration-300">Trang chủ</a></li>
-                        <li><a href="#" class="text-gray-200 dark:text-gray-300 hover:text-white transition duration-300">Sản phẩm</a></li>
-                        <li><a href="#" class="text-gray-200 dark:text-gray-300 hover:text-white transition duration-300">Blog sức khỏe</a></li>
-                        <li><a href="#" class="text-gray-200 dark:text-gray-300 hover:text-white transition duration-300">Dịch vụ y tế</a></li>
-                        <li><a href="#" class="text-gray-200 dark:text-gray-300 hover:text-white transition duration-300">Liên hệ</a></li>
+                        <li><a href="#" class="text-gray-200 dark:text-gray-300 hover:text-white transition duration-300">Sức khoẻ tinh thần</a></li>
+                        <li><a href="#" class="text-gray-200 dark:text-gray-300 hover:text-white transition duration-300">Dinh dưỡng & ăn uống</a></li>
                     </ul>
                 </div>
                 <div>
@@ -147,21 +133,6 @@
             html.classList.toggle('dark');
         });
 
-        // Slideshow
-        const slides = document.querySelectorAll('.slideshow img');
-        let currentSlide = 0;
-
-        function showSlide(n) {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (n + slides.length) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
-
-        function nextSlide() {
-            showSlide(currentSlide + 1);
-        }
-
-        setInterval(nextSlide, 5000); // Change slide every 5 seconds
     </script>
 </body>
 

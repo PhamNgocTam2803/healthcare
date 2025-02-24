@@ -36,3 +36,7 @@ Route::get('/post/{post_id}', [PostController::class, 'getPost']);
 
 Route::get('/category/{category_slug}', [PostController::class, 'getCategory']);
 // Route::view('/post', 'post')->name('post');
+
+Route::get('/search', [PostController::class, 'search'])->name('search');
+
+// Route::view('/result', 'result');

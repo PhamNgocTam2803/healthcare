@@ -5,7 +5,7 @@
 @section('content')
 <main class="bg-gray-100 dark:bg-gray-900">
     <!-- Hero Section -->
-    <section class="bg-primary-light dark:bg-primary-dark text-white py-20 shadow-lg">
+    {{-- <section class="bg-primary-light dark:bg-primary-dark text-white py-20 shadow-lg">
         <div class="container mx-auto px-4">
             <div class="md:w-2/3 mx-auto">
                 <div class="slideshow rounded-lg shadow-xl overflow-hidden">
@@ -16,8 +16,8 @@
                 </div>
             </div>
         </div>
-    </section>
-
+    </section> --}}
+    
     <!-- Mind Health -->
     <section class="py-16 bg-white dark:bg-gray-800 shadow-md">
         <div class="container mx-auto px-4">

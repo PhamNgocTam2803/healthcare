@@ -1,12 +1,12 @@
 @extends('layout')
 
-@section('title', $category)
-
+@section('title', $category->meta_name)
+@section('description', $category->meta_desc)
 @section('content')
 <section class="py-16 bg-white dark:bg-gray-800 shadow-md">
     <div class="container mx-auto px-4">
         <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-primary-light dark:text-primary-dark inline-block border-b-4 border-secondary-light dark:border-secondary-dark pb-4">{{$category}}</h2>
+            <h2 class="text-4xl font-bold text-primary-light dark:text-primary-dark inline-block border-b-4 border-secondary-light dark:border-secondary-dark pb-4">{{$category->name}}</h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             @foreach($posts as $post)
